@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { push as Menu } from "react-burger-menu";
+import { slide as Menu } from "react-burger-menu";
 import "./Sidebar.css"
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 export default function Sidebar(){
     // const location = useLocation();
     return(
         <div>
-            <Menu isOpen={ true } noOverlay outerContainerId={"root"} pageWrapId={"footer" || "page-wrap"}>
+            <Menu noOverlay outerContainerId={"root"} pageWrapId={"footer"}>
                 <a className="menu-item" href="/User-dashboard">
                     Dashboard
                 </a>

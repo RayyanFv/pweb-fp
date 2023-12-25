@@ -4,9 +4,7 @@ import { getFirestore, onSnapshot, collection, addDoc, orderBy, query, serverTim
 import { auth, app } from '../../../firebase';
 import Sidebar from '../../components/Sidebar';
 
-
 const db = getFirestore(app);
-
 
 function App() {
   const [user, setUser] = useState(null);
