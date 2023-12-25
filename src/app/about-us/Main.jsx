@@ -1,15 +1,29 @@
+import { motion } from 'framer-motion';
+
 function AboutUs() {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
     return (
         <>
-  <div className='relative h-[60vh] overflow-hidden'>
-     
-     <div className='w-full h-full bg-gradient-to-b from-[#0C132F] via-0B0C10 to-transparent rounded-b-full absolute'>
+        <motion.div
+        className='relative h-[60vh] overflow-hidden'
+        initial='hidden'
+        animate='visible'
+        variants={fadeInUp}
+      >
+        <div className='w-full h-full bg-gradient-to-b from-[#0C132F] via-0B0C10 to-transparent rounded-b-full absolute'>
      <div className='flex text-7xl font-bold justify-center text-center px-64 py-10'>About Us</div>
      <div className='flex text-2xl font-normal justify-center text-center px-64 py-10'>Meet our awesome developers</div> 
      </div>
+      </motion.div>
  
-   </div>
-
    <div className='flex flex-row h-[200px] w-auto mx-64'>
       <div className='flex  bg-blue-900 flex-col h-[200px] w-[200px] mr-auto justify-between rounded-tl-[30px] rounded-br-[30px] shadow-2xl shadow-cyan-800/65' >
         <img src='/images/homepage/mark.png' className='h-40 rounded-tl-[30px] '/>

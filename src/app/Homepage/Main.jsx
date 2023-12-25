@@ -1,15 +1,29 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 function Homepage() {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
   return (
     <>
-      <div className='relative h-[60vh] overflow-hidden'>
-
+      <motion.div
+        className='relative h-[60vh] overflow-hidden'
+        initial='hidden'
+        animate='visible'
+        variants={fadeInUp}
+      >
         <div className='w-full h-full bg-gradient-to-b from-[#0C132F] via-0B0C10 to-transparent rounded-b-full absolute'>
           <div className='flex text-7xl font-bold justify-center text-center my-14 px-64 py-10'>Welcome to the Z-Sharp Era</div>
         </div>
-
-      </div>
+      </motion.div>
+     
       <div className='flex rounded-full border bg-navbar h-fit w-fit mt-4 px-6 mx-auto'>
         <div className='font-semibold flex justify-left flex-row gap-8 mt-4 ml-8 mb-4'>
           Z-Sharp Era

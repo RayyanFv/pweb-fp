@@ -1,14 +1,29 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
 function Tech() {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
   return (
     <>
-      <div className='relative h-[60vh] overflow-hidden'>
-
+     <motion.div
+        className='relative h-[60vh] overflow-hidden'
+        initial='hidden'
+        animate='visible'
+        variants={fadeInUp}
+      >
         <div className='w-full h-full bg-gradient-to-b from-[#0C132F] via-0B0C10 to-transparent rounded-b-full absolute'>
           <div className='flex text-7xl font-bold justify-center text-center px-64 py-10'>Build and Improve Your Business Through Z-Sharp Technologies</div>
         </div>
-
-      </div>
-
+      </motion.div>
       <div className='flex text-2xl font-normal justify-center text-center my-10 px-64 py-10'>Z-Sharp is supported using Power BI to utilize Business Intelligence Analysis and integrate with market research to improve your business </div>
       <div className="tech flex flex-row h-[400px] w-auto mx-24">
         <div className='w-1/2 mx-10 border-2 rounded-3xl px-8 py-10  bg-gradient-to-tr from-[#d8d8d83a]'>
@@ -74,9 +89,11 @@ function Tech() {
 
       </div>
       <div className='flex text-2xl font-normal justify-center text-center my-2 px-64 py-10'>So, what are you waiting for? Let’s make a change together</div>
-      <button className='flex bg-[#1C1C1C] border flex-col h-16 w-64 mx-auto rounded-xl drop-shadow-xl px-7 my-5' >
+      <Link to="/purchase">
+      <button className='flex bg-[#1C1C1C] border flex-col h-16 w-64 mx-auto rounded-xl drop-shadow-xl px-7 my-5'>
         <div className="mx-auto my-auto font-semibold">Purchase Now</div>
       </button>
+    </Link>
 
     </>
   )
