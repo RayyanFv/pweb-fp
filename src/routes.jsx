@@ -10,6 +10,8 @@ import UserDashboard from './app/user-dashboard/Main'
 import AdminDashboard from './app/admin-dashboard/Main'
 import AdminDashboardGetUser from './app/admin-dashboard-getuser/Main'
 import BusinessIntelligence from './app/business-intelligence/Main'
+import CobaUpload from './app/coba-upload/Main'
+
 
 const AppRoutes = () => {
   return (
@@ -25,7 +27,8 @@ const AppRoutes = () => {
       <Route path="/user-dashboard/MR" element={<BusinessIntelligence />} />
       <Route path="/user-dashboard/BC" element={<BusinessIntelligence />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
-      <Route path="/admin-dashboard-getuser" element={<AdminDashboardGetUser />} />
+      <Route path="/coba-upload" element={<CobaUpload />} />
+     
     </Routes>
   );
 }
