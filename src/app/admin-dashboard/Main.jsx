@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import Sidebar from '../../components/Sidebar';
 
 const firebaseConfig = {
     apiKey: "AIzaSyDHZOmC3wqbu6oTllK2QOCUyLo4V2kX0vk",
