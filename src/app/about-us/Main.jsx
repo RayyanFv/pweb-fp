@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Desktop, Mobile } from '../../utils/MediaQuery';
-import Developer from './Developer';
+import Developer from '../../components/Developer';
 
 function AboutUs() {
   const fadeInUp = {

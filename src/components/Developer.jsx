@@ -1,7 +1,7 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Desktop, Mobile } from '../../utils/MediaQuery';
+import { Desktop, Mobile } from '../utils/MediaQuery';
 
 // ...
 
