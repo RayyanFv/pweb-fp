@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, app } from '../../../firebase';
+import { useNavigate } from 'react-router';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -8,6 +9,7 @@ function Signup() {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSignUp = async () => {
     try {
@@ -29,6 +31,8 @@ function Signup() {
       
       // Tampilkan pesan berhasil
       setSuccessMessage(`Account created successfully! Welcome, ${user.email}`);
+      navigate("/login");
+      
     } catch (error) {
       setError(error.message);
     }
