@@ -35,6 +35,7 @@ const AppRoutes = () => {
       <Route path="/admin-dashboard/BC" element={<AdminDashboard />} />
       <Route path="/coba-upload" element={<CobaUpload />} />
       <Route path="/admin-dashboard-getdata" element={<AdminDashboardGetData />} />
+      <Route path="/admin-dashboard-getuser" element={<AdminDashboardGetData />} />
     </Routes>
   );
 }
