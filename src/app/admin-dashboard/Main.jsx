@@ -103,16 +103,16 @@ const firebaseConfig = {
             <div className='text-xl font-bold text-center mt-10`'>Admin Dashboard</div>
           </a>
           <a href="/admin-dashboard" className='mt-8'>
-            <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard')}`}>Business Assistant</div>
+            <div className={`hover:underline text-md text-center ${isPageActive('/admin-dashboard')}`}>Business Assistant</div>
           </a>
           <a href="/admin-dashboard/BI" className='mt-4'>
-            <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/BI')}`}>Business Intelligence</div>
+            <div className={`hover:underline text-md text-center ${isPageActive('/admin-dashboard/BI')}`}>Business Intelligence</div>
           </a>
           <a href="/admin-dashboard/MR" className='mt-4'>
-            <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/MR')}`}>Market Research</div>
+            <div className={`hover:underline text-md text-center ${isPageActive('/admin-dashboard/MR')}`}>Market Research</div>
           </a>
           <a href="/admin-dashboard/BC" className='mt-4'>
-            <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/BC')}`}>Business Consultant</div>
+            <div className={`hover:underline text-md text-center ${isPageActive('/admin-dashboard/BC')}`}>Business Consultant</div>
           </a>
         </div>
 
