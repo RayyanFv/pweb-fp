@@ -71,7 +71,7 @@ export default function UserBusinessIntelligence() {
       console.log('File information saved to Firestore with ID:', newFileRef.id);
 
       // Implementasikan tindakan sukses di sini
-      alert('File uploaded successfully');
+     
 
     } catch (error) {
       console.error('Error uploading file:', error);

@@ -13,6 +13,7 @@ import UserBusinessConsultant from './app/user-dashboard/business-consultant/Mai
 import AdminDashboard from './app/admin-dashboard/Main'
 import AdminDashboardGetUser from './app/admin-dashboard-getuser/Main'
 import CobaUpload from './app/coba-upload/Main'
+import AdminDashboardGetData from './app/admin-dashboard-getdata/Main'
 
 
 const AppRoutes = () => {
@@ -33,7 +34,7 @@ const AppRoutes = () => {
       <Route path="/admin-dashboard/MR" element={<AdminDashboard />} />
       <Route path="/admin-dashboard/BC" element={<AdminDashboard />} />
       <Route path="/coba-upload" element={<CobaUpload />} />
-     
+      <Route path="/admin-dashboard-getdata" element={<AdminDashboardGetData />} />
     </Routes>
   );
 }
