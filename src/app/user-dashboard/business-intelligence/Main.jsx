@@ -169,7 +169,7 @@ export default function UserBusinessIntelligence() {
               id='file'
               name="file"
               type="file"
-              accept=".csv"
+              accept=".xlsx"
               onChange={handleFileChange}
               className='w-full mb-4'
               required
