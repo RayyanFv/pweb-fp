@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { getFirestore, onSnapshot, collection, addDoc, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { auth, app } from '../../../firebase';
+import { useNavigate } from 'react-router';
 
 const db = getFirestore(app);
 
@@ -16,6 +17,7 @@ function Signin() {
   const [successMessage, setSuccessMessage] = useState(null);
   const [googleSuccessMessage, setGoogleSuccessMessage] = useState(null);
   const isLoggingIn = useRef(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -26,7 +28,7 @@ function Signin() {
           // Setelah menampilkan pesan sukses, kosongkan pesan setelah 3 detik (3000 milidetik)
           const timeoutId = setTimeout(() => {
             setSuccessMessage(null);
-            window.location.href='/'
+            navigate('/user-dashboard');
           }, 3000);
 
           return () => clearTimeout(timeoutId); // Membersihkan timeout saat komponen di-unmount
