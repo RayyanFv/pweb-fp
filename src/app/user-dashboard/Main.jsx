@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { getFirestore, onSnapshot, collection, addDoc, orderBy, query, serverTimestamp, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { auth, app } from '../../../firebase';
-import Sidebar from '../../components/Sidebar';
+// import Sidebar from '../../components/Sidebar';
 
 const db = getFirestore(app);
 
@@ -13,6 +13,10 @@ function App() {
   const [editingMessageId, setEditingMessageId] = useState(null);
   const [editingMessageText, setEditingMessageText] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const isPageActive = (pathname) => {
+    return location.pathname === pathname ? 'font-bold border bg-[#121212] w-fit mx-auto rounded-xl p-1' : '';
+  };
 
   useEffect(() => {
     const q = query(collection(db, 'messages'), orderBy('timestamp'));
@@ -72,9 +76,35 @@ function App() {
   };
 
   return (
-    <div id="page-wrap" className="flex page-wrap w-auto h-full">
-      <Sidebar />
-      <div className="flex flex-col w-4/5 h-full mx-auto gap-3 py-10">
+    <div className="flex border h-screen w-auto">
+      
+      {/* <Sidebar/> */}
+      {/* Sidebar */}
+      <div className=' flex flex-col w-1/6 h-full py-8 gap-1 border-r bg-[#0C132F]'>
+        <a href="/user-dashboard" className='hover:scale-110'>
+          <div className='text-3xl font-bold text-center mt-10`'>Z-Sharp</div>
+          <div className='text-2xl font-bold text-center mt-10`'>Dashboard</div>
+        </a>
+        <a href="/user-dashboard" className='mt-8'>
+          <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard')}`}>Business Assistant</div>
+        </a>
+        <a href="/user-dashboard/BI" className='mt-4'>
+          <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/BI')}`}>Business Intelligence</div>
+        </a>
+        <a href="/user-dashboard/MR" className='mt-4'>
+          <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/MR')}`}>Market Research</div>
+        </a>
+        <a href="/user-dashboard/BC" className='mt-4'>
+          <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/BC')}`}>Business Consultant</div>
+        </a>
+      </div>
+
+      <div className='flex flex-col ml-auto my-auto gap-5 px-5'>
+        {/* User information */}
+      </div>
+
+      {/* dashboard content */}
+      <div className="flex flex-col container mx-auto gap-3 py-10">
         <div className="font-bold mx-auto text-3xl">Chat</div>
         <div className="flex flex-col gap-2">
           {messages.slice(-20).map((msg, index) => (
@@ -156,7 +186,6 @@ function App() {
           </button>
         </div>
       </div>
-      {/* </Sidebar> */}
     </div>
   );
 }

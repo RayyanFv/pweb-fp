@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import Sidebar from '../../components/Sidebar';
+// import Sidebar from '../../components/Sidebar';
 
 const firebaseConfig = {
     apiKey: "AIzaSyDHZOmC3wqbu6oTllK2QOCUyLo4V2kX0vk",
@@ -14,6 +14,9 @@ const firebaseConfig = {
     measurementId: "G-JRC0PPJ161"
   };
 
+  const isPageActive = (pathname) => {
+    return location.pathname === pathname ? 'font-bold border bg-[#121212] w-fit mx-auto rounded-xl p-1' : '';
+  };
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
@@ -92,9 +95,27 @@ const firebaseConfig = {
     <>
       {/* Your existing header content */}
       <div className='flex border h-screen w-auto'>
-        <div className='flex flex-col w-1/5 h-full py-8 gap-1 border-r'>
-        <Sidebar />
+        
+        {/* Sidebar */}
+        <div className='flex flex-col w-1/6 h-full py-8 gap-1 border-r bg-[#0C132F]'>
+          <a href="/admin-dashboard" className='hover:scale-110'>
+            <div className='text-3xl font-bold text-center mt-10`'>Z-Sharp</div>
+            <div className='text-xl font-bold text-center mt-10`'>Admin Dashboard</div>
+          </a>
+          <a href="/admin-dashboard" className='mt-8'>
+            <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard')}`}>Business Assistant</div>
+          </a>
+          <a href="/admin-dashboard/BI" className='mt-4'>
+            <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/BI')}`}>Business Intelligence</div>
+          </a>
+          <a href="/admin-dashboard/MR" className='mt-4'>
+            <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/MR')}`}>Market Research</div>
+          </a>
+          <a href="/admin-dashboard/BC" className='mt-4'>
+            <div className={`hover:underline text-md text-center ${isPageActive('/user-dashboard/BC')}`}>Business Consultant</div>
+          </a>
         </div>
+
         <div className='flex flex-col ml-auto my-auto gap-5 px-5'>
           {/* User information */}
         </div>

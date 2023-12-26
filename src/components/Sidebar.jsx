@@ -8,16 +8,16 @@ export default function Sidebar() {
   return (
     <div>
       <Menu noOverlay outerContainerId={"root"} pageWrapId={"footer"}>
-        <a className="menu-item" href="/User-dashboard">
+        <a className="menu-item" href="/user-dashboard">
           Dashboard
         </a>
-        <a className="menu-item" href="/User-dashboard/BI">
+        <a className="menu-item" href="/user-dashboard/BI">
           Business Intelligence
         </a>
-        <a className="menu-item" href="/User-dashboard/MR">
+        <a className="menu-item" href="/user-dashboard/MR">
           Market Research
         </a>
-        <a className="menu-item" href="/User-dashboard/BC">
+        <a className="menu-item" href="/user-dashboard/BC">
           Business Consultant
         </a>
       </Menu>
