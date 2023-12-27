@@ -11,6 +11,9 @@ import UserBusinessIntelligence from './app/user-dashboard/business-intelligence
 import UserMarketResearch from './app/user-dashboard/market-research/Main'
 import UserBusinessConsultant from './app/user-dashboard/business-consultant/Main'
 import AdminDashboard from './app/admin-dashboard/Main'
+import AdminBusinessIntelligence from './app/admin-dashboard/business-intelligence/Main'
+// import AdminMarketResearch from './app/admin-dashboard/market-research/Main'
+// import AdminBusinessConsultant from './app/admin-dashboard/business-consultant/Main'
 import AdminDashboardGetUser from './app/admin-dashboard-getuser/Main'
 import CobaUpload from './app/coba-upload/Main'
 import AdminDashboardGetData from './app/admin-dashboard-getdata/Main'
@@ -30,7 +33,7 @@ const AppRoutes = () => {
       <Route path="/user-dashboard/MR" element={<UserMarketResearch />} />
       <Route path="/user-dashboard/BC" element={<UserBusinessConsultant />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
-      <Route path="/admin-dashboard/BI" element={<AdminDashboard />} />
+      <Route path="/admin-dashboard/BI" element={<AdminBusinessIntelligence />} />
       <Route path="/admin-dashboard/MR" element={<AdminDashboard />} />
       <Route path="/admin-dashboard/BC" element={<AdminDashboard />} />
       <Route path="/coba-upload" element={<CobaUpload />} />

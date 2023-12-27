@@ -123,7 +123,7 @@ function Signin() {
           <div className="flex flex-col gap-2">
             <div className="text-xl font-medium my-auto">Email</div>
             <input
-              className="border border-white py-3 px-4 w-full mb-2 rounded-xl"
+              className="border border-white py-3 px-4 w-full mb-2 rounded-xl text-black"
               placeholder="Insert your Email"
               name="email"
               type="text"
@@ -135,7 +135,7 @@ function Signin() {
           <div className="flex flex-col gap-2 my-7">
             <div className="text-xl font-medium my-auto">Password</div>
             <input
-              className="border border-white py-3 px-4 w-full mb-2 rounded-xl"
+              className="border border-white py-3 px-4 w-full mb-2 rounded-xl text-black"
               placeholder="Insert your Password"
               name="password"
               type="password"
