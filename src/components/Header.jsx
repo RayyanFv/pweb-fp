@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Dropdown from './Dropdown';
 import { Default, Desktop, Mobile } from '../utils/MediaQuery';
+import { auth } from '../../firebase';
 
 function Header() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function Header() {
             <Link to="/technologies" className={`mt-[3px] hover:underline ${isPageActive('/technologies')}`}>Technologies</Link>
             <Link to="/purchase" className={`mt-[3px] hover:underline ${isPageActive('/purchase')}`}>Purchase</Link>
             <Link to="/about-us" className={`mt-[3px] hover:underline ${isPageActive('/about-us')}`}>About</Link>
+            {auth.currentUser && auth.currentUser.email === 'ryo@admin.com' && <Link to="/admin-dashboard" className={`hover:underline ${isPageActive('/admin-dashboard')}`}>Admin</Link>}
           </div>
           <div>
             <Dropdown />
@@ -35,6 +37,7 @@ function Header() {
             <Link to="/technologies" className={`hover:underline ${isPageActive('/technologies')}`}>Technologies</Link>
             <Link to="/purchase" className={`hover:underline ${isPageActive('/purchase')}`}>Purchase</Link>
             <Link to="/about-us" className={`hover:underline ${isPageActive('/about-us')}`}>About</Link>
+            {auth.currentUser && auth.currentUser.email === 'ryo@admin.com' && <Link to="/admin-dashboard" className={`hover:underline ${isPageActive('/admin-dashboard')}`}>Admin</Link>}
           </div>
         </div>
       </Mobile>

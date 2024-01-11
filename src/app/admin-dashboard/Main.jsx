@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+
+
 // import Sidebar from '../../components/Sidebar';
 
 const firebaseConfig = {
@@ -21,11 +23,17 @@ const firebaseConfig = {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const auth = getAuth();
+
   
   function AdminDash() {
-    const [loading, setLoading] = useState(true);
-    const [posts, setPosts] = useState([]);
-    const [users, setUsers] = useState([]);
+    
+  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
+
+if(auth.currentUser){
+  if(auth.currentUser.email =='ryo@admin.com'){ 
+
   
     useEffect(() => {
       const fetchMessages = () => {
@@ -45,28 +53,10 @@ const firebaseConfig = {
         return () => unsubscribe();
       };
   
-      const fetchUserAccounts = async () => {
-        try {
-          const userRecords = await getAuth().listUsers(auth);
-          const userData = userRecords.map((userRecord) => ({
-            uid: userRecord.uid,
-            email: userRecord.email,
-            displayName: userRecord.displayName,
-            // Add other user properties as needed
-          }));
-  
-          setUsers(userData);
-          setLoading(false);
-        } catch (error) {
-          console.error('Error fetching user accounts:', error);
-          setLoading(false);
-        }
-      };
-  
+
       // Fetch both messages and user accounts
       fetchMessages();
-      fetchUserAccounts();
-    }, [db, auth, loading]);
+    }, [db, auth,loading]);
   
     const handleDeleteMessage = async (postId) => {
       try {
@@ -170,4 +160,12 @@ const firebaseConfig = {
   );
 }
 
+
+}
+else{
+  // send to login page
+}
+
+}
 export default AdminDash;
+   

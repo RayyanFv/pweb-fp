@@ -32,7 +32,7 @@ function Signup() {
 
       // Tampilkan pesan berhasil
       setSuccessMessage(`Account created successfully! Welcome, ${user.email}`);
-      navigate("/login");
+      navigate("/");
 
     } catch (error) {
       setError(error.message);

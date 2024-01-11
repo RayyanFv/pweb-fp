@@ -25,8 +25,7 @@ const auth = getAuth();
 function AdminDash() {
     const [loading, setLoading] = useState(true);
     const [posts, setPosts] = useState([]);
-    const [users, setUsers] = useState([]);
-
+    
     useEffect(() => {
         const fetchMessages = () => {
             const getPostsFromFirebase = [];
@@ -48,28 +47,9 @@ function AdminDash() {
             return () => unsubscribe();
         };
 
-
-        const fetchUserAccounts = async () => {
-            try {
-                const userRecords = await getAuth().listUsers(auth);
-                const userData = userRecords.map((userRecord) => ({
-                    uid: userRecord.uid,
-                    email: userRecord.email,
-                    displayName: userRecord.displayName,
-                    // Add other user properties as needed
-                }));
-
-                setUsers(userData);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching user accounts:', error);
-                setLoading(false);
-            }
-        };
-
         // Fetch both messages and user accounts
         fetchMessages();
-        fetchUserAccounts();
+        
     }, [db, auth, loading]);
 
     const handleDeleteMessage = async (postId) => {

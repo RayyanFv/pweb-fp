@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mobile, Desktop } from '../../utils/MediaQuery';
+import { auth } from '../../../firebase';
 
 function Tech() {
   const fadeInUp = {
