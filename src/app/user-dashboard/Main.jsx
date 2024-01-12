@@ -1,6 +1,22 @@
 import { useState, useEffect } from 'react';
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
-import { getFirestore, onSnapshot, collection, addDoc, orderBy, query, serverTimestamp, doc, updateDoc, deleteDoc,where } from 'firebase/firestore';
+import {
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+} from 'firebase/auth';
+import {
+  getFirestore,
+  onSnapshot,
+  collection,
+  addDoc,
+  orderBy,
+  query,
+  serverTimestamp,
+  doc,
+  updateDoc,
+  deleteDoc,
+  where, // Add this import
+} from 'firebase/firestore';
 import { auth, app } from '../../../firebase';
 // import Sidebar from '../../components/Sidebar';
 
@@ -14,22 +30,38 @@ function App() {
   const [editingMessageText, setEditingMessageText] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Generate a unique conversation ID based on user IDs
+  const conversationId = user ? `${user.uid}_ryo@admin.com` : '';
+
   const isPageActive = (pathname) => {
-    return location.pathname === pathname ? 'font-bold border bg-[#121212] w-fit mx-auto rounded-xl p-1' : '';
+    return location.pathname === pathname
+      ? 'font-bold border bg-[#121212] w-fit mx-auto rounded-xl p-1'
+      : '';
   };
 
   useEffect(() => {
-    const q = query(collection(db, 'messages'), where('private', '==', true), where('recipientEmail', '==', 'ryo@admin.com'), orderBy('timestamp'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setMessages(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
+    // Only fetch messages if the user is authenticated
+    if (user) {
+      const q = query(
+        collection(db, 'messages'),
+        where('private', '==', true),
+        where('conversationId', '==', conversationId),
+        orderBy('timestamp')
       );
-    });
-    return unsubscribe;
-  }, []);
+
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        setMessages(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        );
+      });
+
+      return unsubscribe;
+    }
+  }, [user, conversationId]);
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -42,9 +74,9 @@ function App() {
 
   const sendMessage = async () => {
     if (newMessage.trim() === '') return;
-  
+
     setLoading(true);
-  
+
     await addDoc(collection(db, 'messages'), {
       uid: user.uid,
       photoURL: user.photoURL,
@@ -52,13 +84,14 @@ function App() {
       text: newMessage,
       timestamp: serverTimestamp(),
       private: true,
-      recipientEmail: 'ryo@admin.com', // Admin's email
+      conversationId: conversationId,
     }).then(() => {
       setLoading(false);
     });
-  
+
     setNewMessage('');
   };
+
 
   const handleEditMessage = (messageId, text) => {
     setEditingMessageId(messageId);
