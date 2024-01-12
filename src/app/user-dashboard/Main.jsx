@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
-import { getFirestore, onSnapshot, collection, addDoc, orderBy, query, serverTimestamp, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { getFirestore, onSnapshot, collection, addDoc, orderBy, query, serverTimestamp, doc, updateDoc, deleteDoc,where } from 'firebase/firestore';
 import { auth, app } from '../../../firebase';
 // import Sidebar from '../../components/Sidebar';
 
@@ -17,21 +17,19 @@ function App() {
   const isPageActive = (pathname) => {
     return location.pathname === pathname ? 'font-bold border bg-[#121212] w-fit mx-auto rounded-xl p-1' : '';
   };
+
   useEffect(() => {
-    const q = query(collection(db, 'messages'), orderBy('timestamp'));
+    const q = query(collection(db, 'messages'), where('private', '==', true), where('recipientEmail', '==', 'ryo@admin.com'), orderBy('timestamp'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setMessages(
-        snapshot.docs
-          .filter((doc) => doc.data().uid === user?.uid)
-          .map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          }))
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
       );
     });
     return unsubscribe;
-  }, [user]);
-
+  }, []);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -44,28 +42,29 @@ function App() {
 
   const sendMessage = async () => {
     if (newMessage.trim() === '') return;
+  
     setLoading(true);
+  
     await addDoc(collection(db, 'messages'), {
       uid: user.uid,
       photoURL: user.photoURL,
       displayName: user.displayName,
       text: newMessage,
       timestamp: serverTimestamp(),
+      private: true,
+      recipientEmail: 'ryo@admin.com', // Admin's email
     }).then(() => {
       setLoading(false);
     });
+  
     setNewMessage('');
   };
 
   const handleEditMessage = (messageId, text) => {
-    const isUserMessageOwner = messages.some((msg) => msg.id === messageId && msg.data.uid === user?.uid);
-    if (isUserMessageOwner) {
-      setEditingMessageId(messageId);
-      setEditingMessageText(text);
-    } else {
-      alert('You are not authorized to edit this message.');
-    }
+    setEditingMessageId(messageId);
+    setEditingMessageText(text);
   };
+
   const handleUpdateMessage = async () => {
     if (editingMessageId && editingMessageText.trim() !== '') {
       await updateDoc(doc(db, 'messages', editingMessageId), {
@@ -77,13 +76,9 @@ function App() {
   };
 
   const handleDeleteMessage = async (messageId) => {
-    const isUserMessageOwner = messages.some((msg) => msg.id === messageId && msg.data.uid === user?.uid);
-    if (isUserMessageOwner) {
-      await deleteDoc(doc(db, 'messages', messageId));
-    } else {
-      alert('You are not authorized to delete this message.');
-    }
+    await deleteDoc(doc(db, 'messages', messageId));
   };
+
   return (
     <div className="flex border h-screen w-auto">
       
