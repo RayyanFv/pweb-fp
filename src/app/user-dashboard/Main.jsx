@@ -17,19 +17,20 @@ function App() {
   const isPageActive = (pathname) => {
     return location.pathname === pathname ? 'font-bold border bg-[#121212] w-fit mx-auto rounded-xl p-1' : '';
   };
-
   useEffect(() => {
     const q = query(collection(db, 'messages'), orderBy('timestamp'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setMessages(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
+        snapshot.docs
+          .filter((doc) => doc.data().uid === user?.uid)
+          .map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
       );
     });
     return unsubscribe;
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -57,10 +58,14 @@ function App() {
   };
 
   const handleEditMessage = (messageId, text) => {
-    setEditingMessageId(messageId);
-    setEditingMessageText(text);
+    const isUserMessageOwner = messages.some((msg) => msg.id === messageId && msg.data.uid === user?.uid);
+    if (isUserMessageOwner) {
+      setEditingMessageId(messageId);
+      setEditingMessageText(text);
+    } else {
+      alert('You are not authorized to edit this message.');
+    }
   };
-
   const handleUpdateMessage = async () => {
     if (editingMessageId && editingMessageText.trim() !== '') {
       await updateDoc(doc(db, 'messages', editingMessageId), {
@@ -72,9 +77,13 @@ function App() {
   };
 
   const handleDeleteMessage = async (messageId) => {
-    await deleteDoc(doc(db, 'messages', messageId));
+    const isUserMessageOwner = messages.some((msg) => msg.id === messageId && msg.data.uid === user?.uid);
+    if (isUserMessageOwner) {
+      await deleteDoc(doc(db, 'messages', messageId));
+    } else {
+      alert('You are not authorized to delete this message.');
+    }
   };
-
   return (
     <div className="flex border h-screen w-auto">
       

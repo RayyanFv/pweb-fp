@@ -22,7 +22,7 @@ const firebaseConfig = {
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  const auth = getAuth();
+  const auth =  getAuth();
 
   
   function AdminDash() {
@@ -83,10 +83,10 @@ if(auth.currentUser){
   
   return (
     <>
-      {/* Your existing header content */}
+
       <div className='flex border h-screen w-auto'>
         
-        {/* Sidebar */}
+
         <div className='flex flex-col w-1/6 h-full py-8 gap-1 border-r bg-[#0C132F]'>
           <a href="/admin-dashboard" className='hover:scale-110'>
             <div className='text-3xl font-bold text-center mt-10`'>Z-Sharp</div>
@@ -107,12 +107,12 @@ if(auth.currentUser){
         </div>
 
         <div className='flex flex-col ml-auto my-auto gap-5 px-5'>
-          {/* User information */}
+
         </div>
 
         <div className='flex flex-col w-full h-full mx-auto gap-3 py-10'>
          
-           {/* Table to display messages */}
+  
            <table className="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
